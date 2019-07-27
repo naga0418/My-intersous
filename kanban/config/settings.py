@@ -134,9 +134,14 @@ LOGIN_REDIRECT_URL = "kanban:home"
 LOGOUT_REDIRECT_URL = "kanban:index"
 LOGIN_URL = "login"
 
+# 環境開発の設定と本番環境の設定を分離
 DEBUG = False
 
 try:
     from config.local_settings import *
 except ImportError:
+    pass
+
+if not DEBUG:
+    import django_heroku
     django_heroku.settings(locals())
